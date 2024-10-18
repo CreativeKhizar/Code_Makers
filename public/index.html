@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Login and Registration</title>
+    <style>
+        body {
+            background-image: url('img/background.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-900 bg-opacity-50">
+
+    <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+        <div class="flex justify-center mb-6">
+            <img src="img/logo.jpg" alt="Logo" class="w-24 h-24"> <!-- Logo -->
+        </div>
+
+        <div class="flex justify-around mb-4">
+            <button id="loginBtn" class="text-lg font-bold text-gray-800 hover:text-blue-600 focus:outline-none" onclick="showLogin()">Login</button>
+            <button id="registerBtn" class="text-lg font-bold text-gray-800 hover:text-blue-600 focus:outline-none" onclick="showRegister()">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="form">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Welcome Back!</h2>
+            <form id="loginFormElement" action="/auth/login" method="POST">
+                <div class="mb-4">
+                    <label for="loginEmail" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="loginEmail" name="email" required class="mt-1 p-3 border border-gray-300 rounded-md w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="loginPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="loginPassword" name="password" required class="mt-1 p-3 border border-gray-300 rounded-md w-full">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md">Login</button>
+            </form>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="registerForm" class="form hidden">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Create Your Account</h2>
+            <form id="registerFormElement" action="/auth/register" method="POST">
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="name" name="name" required class="mt-1 p-3 border border-gray-300 rounded-md w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" required class="mt-1 p-3 border border-gray-300 rounded-md w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" required class="mt-1 p-3 border border-gray-300 rounded-md w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required class="mt-1 p-3 border border-gray-300 rounded-md w-full">
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerFormElement').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            alert(result.message);
+            window.location.reload();
+        });
+
+        document.getElementById('loginFormElement').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            const obj=JSON.parse(JSON.stringify(data, null, 2));
+            let email=obj['email'];
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            if(result.message=='Login successful!')
+            {
+                sessionStorage.setItem('email', email);
+                window.location.href = "action.html";
+            }
+            else
+            {
+                alert("Invalid Email or Password");
+            }
+        });
+
+        function showLogin() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

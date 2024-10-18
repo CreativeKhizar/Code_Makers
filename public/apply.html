@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Internship Application Form</title>
+    <style>
+        body {
+            background-image: url('https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+    <div id="form-container" class="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md backdrop-filter backdrop-blur-lg bg-opacity-80">
+        <h2 class="text-xl sm:text-2xl font-bold mb-6 text-center text-gray-800">Internship Application</h2>
+        <form id="application-form">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 text-sm font-semibold mb-2">Name</label>
+                <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Name">
+            </div>
+
+            <div class="mb-4">
+                <label for="rollnumber" class="block text-gray-700 text-sm font-semibold mb-2">Roll Number</label>
+                <input type="text" id="rollnumber" name="rollnumber" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Roll Number">
+            </div>
+
+            <div class="mb-4">
+                <label for="collegename" class="block text-gray-700 text-sm font-semibold mb-2">College Name</label>
+                <input type="text" id="collegename" name="collegename" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your College Name">
+            </div>
+
+            <div class="mb-4">
+                <label for="phonenumber" class="block text-gray-700 text-sm font-semibold mb-2">Phone Number</label>
+                <input type="tel" id="phonenumber" name="phonenumber" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Phone Number">
+            </div>
+
+            <div class="mb-4">
+                <label for="domain" class="block text-gray-700 text-sm font-semibold mb-2">Internship Domain</label>
+                <select id="domain" name="domain" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="">Select Domain</option>
+                    <option value="Full Stack Development">Full Stack Development</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Frontend Development">Frontend Development</option>
+                    <option value="Backend Development">Backend Development</option>
+                    <option value="Data Analysis">Data Analysis</option>
+                    <option value="Excel">Excel</option>
+                    <option value="Python">Python</option>
+                    <option value="Java">Java</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
+                <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Email">
+            </div>
+
+            <div class="mb-4">
+                <label for="start_date" class="block text-gray-700 text-sm font-semibold mb-2">Start Date</label>
+                <input type="date" id="start_date" name="start_date" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="mb-4">
+                <label for="end_date" class="block text-gray-700 text-sm font-semibold mb-2">End Date</label>
+                <input type="date" id="end_date" name="end_date" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit Application</button>
+            </div>
+        </form>
+        <div id="response" class="mt-4 text-center text-gray-700"></div>
+    </div>
+
+    <script>
+        document.getElementById('application-form').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(this);
+            const responseDiv = document.getElementById('response');
+
+            try {
+                const response = await fetch('/api/internship-applications', {
+                    method: 'POST',
+                    body: JSON.stringify(Object.fromEntries(formData)),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert("Thankyou for Submiting the Form we will get in contact soon");
+                    window.location.href='action.html';
+                } else {
+                    alert('Error submitting application');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                responseDiv.textContent = 'Error submitting application';
+            }
+        });
+    </script>
+</body>
+</html>

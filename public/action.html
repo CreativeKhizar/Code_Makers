@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./img/logo.jpg" type="image/x-icon">
+    <title>Codemakers Internship</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-md">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <img src="./img/logo.jpg" alt="Codemakers Logo" class="h-20 mr-3">
+            <h1 class="text-2xl font-bold text-white">Codemakers</h1>
+             <!-- Add a welcome message container -->
+            <div id="welcomeMessage" class="text-yellow-400 text-lg"></div>
+            <!-- Navigation for larger screens -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="text-white hover:text-yellow-400">About</a>
+                <a href="document.html" class="text-white hover:text-yellow-400">Get My Certificates</a>
+                <a href="#contact" class="text-white hover:text-yellow-400">Contact</a>
+                <a href="apply.html" class="text-white hover:text-yellow-400">Apply Now</a>
+                <!-- Logout Button -->
+                <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 hidden">Logout</button>
+            </nav>
+            <script>
+                // Check if user is logged in by sessionStorage
+                document.addEventListener('DOMContentLoaded', function() {
+                    const logoutBtn = document.getElementById('logoutBtn');
+                    const userEmail = sessionStorage.getItem('email');
+            
+                    if (userEmail) {
+                        // Show logout button if the user is logged in
+                        logoutBtn.style.display = 'block';
+                    }
+            
+                    // Logout button click event
+                    logoutBtn.addEventListener('click', function() {
+                        // Clear sessionStorage and log the user out
+                        sessionStorage.removeItem('email');
+                        // Redirect or refresh the page (choose one)
+                        window.location.href = 'home.html'; // Redirect to homepage or login page
+                        // window.location.reload(); // Just reload the current page
+                    });
+                });
+            </script>
+            
+            <!-- Hamburger button for smaller screens -->
+            <button id="hamburgerBtn" class="md:hidden text-white" aria-label="Toggle menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 7.5h16.5m-16.5 7.5h16.5" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Dropdown menu for small screens -->
+        <div id="mobileMenu" class="md:hidden hidden md:text-left bg-gray-800 text-white">
+            <a href="#about" class="block px-4 py-2 hover:bg-gray-700">About</a>
+            <a href="document.html" class="block px-4 py-2 hover:bg-gray-700">Get My Certificates</a>
+            <a href="#contact" class="block px-4 py-2 hover:bg-gray-700">Contact</a>
+            <a href="apply.html" class="block px-4 py-2 hover:bg-gray-700">Apply Now</a>
+        </div>
+    </header>
+    <script>
+        // Function to toggle the mobile menu
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    
+        // Display welcome message using email from sessionStorage
+        document.addEventListener("DOMContentLoaded", function() {
+            const email = sessionStorage.getItem("email");  // Get email from sessionStorage
+            if (email) {
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${email}!`;  // Display email
+            }
+        });
+    </script>
+    
+    <script>
+        // Function to toggle the mobile menu
+        document.getElementById('hamburgerBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden'); // Toggle visibility
+        });
+    </script>
+
+    <script>
+        // JavaScript function to toggle the mobile menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-24">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-20"> 
+            <div class="mb-8 md:mb-0"> 
+                <img src="./img/1.png" alt="Internship Program" class="w-72 h-72 object-cover rounded-lg shadow-lg" />
+            </div>
+            <div class="text-left md:text-left md:ml-2"> 
+                <h2 class="text-4xl font-bold mb-4">Welcome to Codemakers Internship Program</h2>
+                <p class="text-lg mb-8">Join our team and gain real-world experience. Develop your skills and be a part of exciting projects!</p>
+                <a href="#internship" class="bg-yellow-400 text-indigo-600 px-6 py-3 font-semibold rounded-full hover:bg-yellow-500">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    
+    
+    
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto flex flex-col md:flex-row items-center px-4 md:px-8">
+            
+            <div class="md:w-1/2 md:ml-8"> <!-- Text container -->
+                <h2 class="text-3xl font-bold text-gray-800 text-center md:text-left mb-4">About Codemakers</h2>
+                <p class="text-gray-600 text-center md:text-left max-w-3xl mx-auto">Codemakers is a forward-thinking tech company. We focus on software development and innovation. Our internship program is designed to prepare the next generation of tech leaders by giving them hands-on experience with real projects.</p>
+            </div>
+
+            <div class="md:w-1/2 mb-8 md:mb-0"> <!-- Image container -->
+                <img src="./img/2.png" alt="About Codemakers" class="w-full h-80 object-cover rounded-lg shadow-lg" />
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Internship Section -->
+    <section id="internship" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 md:px-8 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-12">Internship Program</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Frontend Internship -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1506765515384-028b60a970df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400" alt="Frontend Development" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Frontend Development</h3>
+                        <p class="text-gray-600 mb-6">Learn modern frontend technologies like HTML, CSS, JavaScript, and React. Create stunning and responsive websites.</p>
+                        <a href="apply.html" class="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-500">Join Now</a>
+                    </div>
+                </div>
+
+                <!-- Backend Internship -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400" alt="Backend Development" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Backend Development</h3>
+                        <p class="text-gray-600 mb-6">Master backend programming languages like Node.js, Python, and work with databases and APIs to create robust systems.</p>
+                        <a href="apply.html" class="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-500">Join Now</a>
+                    </div>
+                </div>
+
+                <!-- Fullstack Internship -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400" alt="FullStack Development" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Fullstack Development</h3>
+                        <p class="text-gray-600 mb-6">Master backend programming languages like Node.js, Python, and work with databases and APIs to create robust systems.</p>
+                        <a href="apply.html" class="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-500">Join Now</a>
+                    </div>
+                </div>
+
+                <!-- Python Internship -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400" alt="Pyhton Development" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Python Development</h3>
+                        <p class="text-gray-600 mb-6">Mastering python programming language by doing real time projects.</p>
+                        <a href="apply.html" class="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-500">Join Now</a>
+                    </div>
+                </div>
+
+                <!-- Java Internship -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400" alt="Java Development" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Java Development</h3>
+                        <p class="text-gray-600 mb-6">Mastering Java programming language by doing real time projects.</p>
+                        <a href="apply.html" class="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-500">Join Now</a>
+                    </div>
+                </div>
+
+                <!-- SQL Internship -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400" alt="SQL Development" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">SQL Development</h3>
+                        <p class="text-gray-600 mb-6">Mastering SQL by solving queries and doing real world projects. </p>
+                        <a href="apply.html" class="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-500">Join Now</a>
+                    </div>
+                </div>
+
+                <!-- Data Analysis Internship -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400" alt="Data Analysis" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Data Analysis</h3>
+                        <p class="text-gray-600 mb-6">Identifying the business question, Collecting raw data sets, Cleaning the data, Analyzing the data, and Interpreting the results. </p>
+                        <a href="apply.html" class="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-500">Join Now</a>
+                    </div>
+                </div>
+
+                <!-- Machine Learning Internship -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=400" alt="Machine Learning" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Machine Learning</h3>
+                        <p class="text-gray-600 mb-6">Machine learning enables computers to learn from data and make decisions or predictions without being explicitly programmed to do so.</p>
+                        <a href="apply.html" class="bg-indigo-600 text-white py-2 px-4 rounded-full hover:bg-indigo-500">Join Now</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4 md:px-8">
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Contact Us</h2>
+            <div class="max-w-lg mx-auto bg-gray-100 p-8 rounded-lg shadow-md">
+                <form>
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-600">Full Name</label>
+                        <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Your Name">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-600">Email Address</label>
+                        <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Your Email">
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-gray-600">Message</label>
+                        <textarea id="message" class="w-full p-3 border border-gray-300 rounded-lg" rows="4" placeholder="Your Message"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-500">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-gray-300 py-10">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:px-8">
+
+            <!-- Address Section -->
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-white">Address</h3>
+                <p>Location: Malleshwaram, Bangalore</p>
+                <p>Call: 8310692638</p>
+                <p>Email: codemakers@gmail.com</p>
+            </div>
+
+            <!-- Links Section -->
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-white">Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Home</a></li>
+                    <li><a href="#about" class="hover:underline">About</a></li>
+                    <li><a href="#" class="hover:underline">Contact Us</a></li>
+                    <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- Info Section -->
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-white">Info</h3>
+                <p>At Codemakers, we believe that everyone deserves the opportunity to learn and grow in the world of technology. Our mission is to offer top-notch online programming courses that won’t break the bank. We’re passionate about making education accessible for all, especially for those who may be facing financial hurdles. Join us on this journey, and let's build a brighter future together!</p>
+            </div>
+
+            <!-- Subscribe Section -->
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-white">Subscribe</h3>
+                <p>Enter your email to stay updated:</p>
+                <form>
+                    <input type="email" placeholder="Your email" class="w-full p-2 mb-4 rounded-lg">
+                    <button class="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-500 w-full">Subscribe</button>
+                </form>
+            </div>
+            
+        </div>
+        <!-- Copyright Notice -->
+            <div class="text-center mt-8 border-t border-gray-700 pt-4">
+                <p class="text-xs sm:text-sm md:text-base lg:text-lg text-gray-400">© 2024 Codemakers. All rights reserved.</p>
+            </div>
+        
+    </footer>
+
+</body>
+</html>
