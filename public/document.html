@@ -20,7 +20,7 @@
             .then(response => response.json())
             .then(domains => {
                 const container = document.getElementById('domains-container');
-
+                
                 if (domains.length > 0) {
                     domains.forEach(domain => {
                         // Create each domain card dynamically

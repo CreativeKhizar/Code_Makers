@@ -242,7 +242,7 @@ router.post('/approve/:internship_id', async (req, res) => {
     <!-- Certificate Body -->
     <div class="text-center mb-8">
       <p class="text-lg text-justify">
-        This is to certify that <strong class="text-4xl font-bold text-blue-900">M Nithin Reddy</strong>, intern ID <i class="text-2xl font-semibold text-gray-900">CM20243203</i> has successfully completed the <strong>Full Stack Development Internship Program</strong> at <span class="font-semibold">CODEMAKERS</span> from 10/05/2024 to 09/07/2024, with Roll No: 22695A3203, from <span class="font-semibold">Madanapalle Institute of Technology and Science</span>.
+        This is to certify that <strong class="text-4xl font-bold text-blue-900">${application.name}</strong>, <i class="text-2xl font-semibold text-gray-900">CM2024320${application.internship_id}</i> has successfully completed the <strong>${application.domain} Internship Program</strong> at <span class="font-semibold">CODEMAKERS</span> from ${formattedStartDate} to ${formattedEndDate}, with Roll No: ${application.rollnumber}, from <span class="font-semibold">${application.collegename}</span>.
         In recognition of your exceptional performance and dedication, we commend your hard work and contributions to our projects.
       </p>
     </div>

@@ -4,7 +4,7 @@ const mysql = require('mysql2/promise');
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'admin123',
+    password: 'admin',
     database: 'auth_system'
 });
 
