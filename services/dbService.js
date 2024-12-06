@@ -13,4 +13,8 @@ async function loginUser(email, password) {
     return rows[0];
 }
 
-module.exports = { registerUser, loginUser };
+async function deleteApplication(id) {
+    await db.query('DELETE FROM internship_applications WHERE internship_id = ?', [id]);
+}
+
+module.exports = { registerUser, loginUser, deleteApplication };

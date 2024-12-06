@@ -15,8 +15,10 @@
     </div>
 
     <script>
+        const email=sessionStorage.getItem('email');
+        console.log(email);
         // Fetch the domains from the API
-        fetch('/api/domains')
+        fetch(`/api/domains?email=${encodeURIComponent(email)}`)
             .then(response => response.json())
             .then(domains => {
                 const container = document.getElementById('domains-container');

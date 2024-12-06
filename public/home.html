@@ -12,6 +12,17 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+        /* Keyframes for scrolling effect */
+    @keyframes marquee {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+
+    /* Marquee animation on the flex container */
+    .animate-marquee {
+        display: flex;
+        animation: marquee 50s linear infinite;
+    }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -63,8 +74,18 @@
         }
     </script>
 
+    
+<!-- <section class="overflow-hidden py-5 bg-gray-900 flex justify-center items-center ">
+    <div class="flex space-x-8 items-center">
+        <img src="/img/logo.jpg" alt="Image 1" class="w-32 h-32 object-cover rounded-full shadow-lg" />
+        <img src="/img/aicte.png" alt="Image 2" class="w-32 h-32 object-cover rounded-full shadow-lg" />
+        <img src="/img/msme.png" alt="Image 3" class="w-64 h-32 object-cover rounded shadow-lg" />
+        <img src="/img/iso.png" alt="Image 4" class="w-32 h-32 object-cover rounded-full shadow-lg" />
+        <img src="/img/images.png" alt="Image 5" class="w-32 h-32 object-cover rounded shadow-lg" />
+    </div>
+</section> -->
 
-    <!-- Hero Section -->
+    <!-- Hero Section
     <section class="bg-blue-600 text-white py-24">
         <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-20"> 
             <div class="mb-8 md:mb-0"> 
@@ -76,9 +97,30 @@
                 <a href="#internship" class="bg-yellow-400 text-indigo-600 px-6 py-3 font-semibold rounded-full hover:bg-yellow-500">Learn More</a>
             </div>
         </div>
-    </section>
+    </section> -->
 
-    
+    <!-- Hero Section -->
+    <section class="bg-blue-600 text-white py-24">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-20">
+            <!-- Main Image -->
+            <div class="mb-8 md:mb-0">
+                <img src="img/1.png" alt="Internship Program" class="w-72 h-72 object-cover rounded-lg shadow-lg" />
+            </div>
+            
+            <!-- Content Section -->
+            <div class="text-center md:text-left md:ml-2 flex flex-col items-center md:items-start">
+                <!-- Centered Logo Image with Responsive Size -->
+                <img src="img/tess.png" alt="Codemakers Logo" class="w-auto h-50 md:w-100 md:h-40 object-cover rounded shadow-lg mb-4" />
+
+                <!-- Heading and Text -->
+                <h2 class="text-4xl font-bold mb-4">Welcome to Codemakers Internship Program</h2>
+                <p class="text-lg mb-8">Join our team and gain real-world experience. Develop your skills and be a part of exciting projects!</p>
+                
+                <!-- Button -->
+                <a href="#internship" class="bg-yellow-400 text-indigo-600 px-6 py-3 font-semibold rounded-full hover:bg-yellow-500">Learn More</a>
+            </div>
+        </div>
+    </section>
     
     
 
@@ -180,6 +222,33 @@
         </div>
     </section>
 
+
+    
+        <!-- Founders Section -->
+        <section class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">Our Founders</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Founder 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+                <img src="/img/founder1.jpg" alt="Founder 1" class="w-32 h-32 mx-auto rounded-full mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">P. Thirumaran</h3>
+                <p class="text-sm text-gray-500">CEO & Co-Founder</p>
+                <p class="mt-4 text-gray-600">An experienced professional with a passion for innovation and excellence in business development.</p>
+                </div>
+                
+                <!-- Founder 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+                <img src="/img/founder2.jpg" alt="Founder 2" class="w-32 h-32 mx-auto rounded-full mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">J. Hari Krishna</h3>
+                <p class="text-sm text-gray-500">CTO & Co-Founder</p>
+                <p class="mt-4 text-gray-600">A tech visionary with years of experience in technology and product development.</p>
+                </div>
+            </div>
+            </div>
+        </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-16 bg-white">
         <div class="container mx-auto px-4 md:px-8">
@@ -212,8 +281,14 @@
             <div>
                 <h3 class="text-xl font-bold mb-4 text-white">Address</h3>
                 <p>Location: Malleshwaram, Bangalore</p>
-                <p>Call: 8310692638</p>
-                <p>Email: codemakers@gmail.com</p>
+                <p>Call: +91 9440699523</p>
+                <p>Email: codemakerspt@gmail.com</p> 
+                <p style="color: green;">
+                    <a href="https://wa.me/9440699523" target="_blank" style="display: inline-flex; align-items: center;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp Icon" style="width: 20px; height: 20px; margin-right: 5px;">
+                        WhatsApp here
+                    </a>
+                </p>
             </div>
 
             <!-- Links Section -->

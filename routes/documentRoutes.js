@@ -5,7 +5,11 @@ const pool = require('../config/internshipDbConfig'); // Adjust the path as need
 // GET route to fetch all domains with approval and internship_id
 router.get('/domains', async (req, res) => {
     try {
-        const [domains] = await pool.execute('SELECT domain, internship_id, approval FROM internship_applications');
+        const email=req.query.email;
+        const [domains] = await pool.execute(
+            'SELECT domain, internship_id, approval FROM internship_applications WHERE email = ?', 
+            [email]  // Pass the email as a parameter
+          );
         res.json(domains);
     } catch (error) {
         console.error('Error fetching domains:', error);

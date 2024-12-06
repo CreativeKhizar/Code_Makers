@@ -11,4 +11,5 @@ async function submitApplication(data) {
     await internshipPool.execute(query, [name, rollnumber, collegename, phonenumber, email, domain, start_date, end_date]);
 }
 
+
 module.exports = { submitApplication };

@@ -15,33 +15,33 @@
 </head>
 <body class="flex items-center justify-center h-screen">
     <div id="form-container" class="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md backdrop-filter backdrop-blur-lg bg-opacity-80">
-        <h2 class="text-xl sm:text-2xl font-bold mb-6 text-center text-gray-800">Internship Application</h2>
+        <h2 class="text-xl sm:text-2xl font-bold mb-0 text-center text-gray-800">Internship Application</h2>
         <form id="application-form">
-            <div class="mb-4">
+            <div class="mb-2">
                 <label for="name" class="block text-gray-700 text-sm font-semibold mb-2">Name</label>
                 <input type="text" id="name" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Name">
             </div>
 
-            <div class="mb-4">
+            <div class="mb-2">
                 <label for="rollnumber" class="block text-gray-700 text-sm font-semibold mb-2">Roll Number</label>
                 <input type="text" id="rollnumber" name="rollnumber" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Roll Number">
             </div>
 
-            <div class="mb-4">
+            <div class="mb-2">
                 <label for="collegename" class="block text-gray-700 text-sm font-semibold mb-2">College Name</label>
                 <input type="text" id="collegename" name="collegename" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your College Name">
             </div>
 
-            <div class="mb-4">
+            <div class="mb-2">
                 <label for="phonenumber" class="block text-gray-700 text-sm font-semibold mb-2">Phone Number</label>
                 <input type="tel" id="phonenumber" name="phonenumber" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Phone Number">
             </div>
 
-            <div class="mb-4">
+            <div class="mb-2">
                 <label for="domain" class="block text-gray-700 text-sm font-semibold mb-2">Internship Domain</label>
                 <select id="domain" name="domain" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     <option value="">Select Domain</option>
-                    <option value="Full Stack Development">Full Stack Development</option>
+                    <!-- <option value="Full Stack Development">Full Stack Development</option>
                     <option value="Data Science">Data Science</option>
                     <option value="Machine Learning">Machine Learning</option>
                     <option value="Frontend Development">Frontend Development</option>
@@ -50,38 +50,90 @@
                     <option value="Excel">Excel</option>
                     <option value="Python">Python</option>
                     <option value="Java">Java</option>
+                    <option value="Artifical Intelligence">Artifical Intelligence</option>
+                    <option value="Very Large Scale Integeration Designs(VLSI)">Very Large Scale Integeration Designs(VLSI)</option>
+                    <option value="Internet of Things (IOT)">Internet of Things (IOT)</option>
+                    <option value="Embedded Systems">Embedded Systems</option>
+                    <option value="Robotics">Robotics</option>
+                    <option value="Raspberry pi">Raspberry pi</option>
+                    <option value="Ux UI Design">Ux UI Design</option>
+                    <option value="Signal Processing">Signal Processing</option>
+                    <option value="Applicantions of IOT in Civil Engineering">Applicantions of IOT in Civil Engineering</option>
+                    <option value="Data Entering">Data Entering</option>
+                    <option value="Structural Engineering">Structural Engineering</option> -->
+                    <!-- <option value="AutoCAD Civil 3D">AutoCAD Civil 3D</option>
+                    <option value="3D CAD Fundamental">3D CAD Fundamental</option> -->
+                    <!-- <option value="Applied Mechanics">Applied Mechanics</option> -->
+                    <!-- <option value="Geo Technical Engineering">Geo Technical Engineering</option> -->
+                    <!-- <option value="AutoCAD">AutoCAD</option>
+                    <option value="Structural Analysis">Structural Analysis</option> -->
+
                 </select>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-2">
                 <label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email</label>
                 <input type="email" id="email" name="email" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Email">
             </div>
 
-            <div class="mb-4">
+            <!-- <div class="mb-2">
                 <label for="start_date" class="block text-gray-700 text-sm font-semibold mb-2">Start Date</label>
                 <input type="date" id="start_date" name="start_date" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
 
-            <div class="mb-4">
-                <label for="end_date" class="block text-gray-700 text-sm font-semibold mb-2">End Date</label>
+            <div class="mb-2">
+                <label for="start_date" class="block text-gray-700 text-sm font-semibold mb-2">End Date</label>
                 <input type="date" id="end_date" name="end_date" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
+            </div> -->
+        
 
             <div class="flex items-center justify-between">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit Application</button>
             </div>
         </form>
-        <div id="response" class="mt-4 text-center text-gray-700"></div>
+        <div id="response" class="text-center text-gray-700"></div>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+        const domainSelect = document.getElementById('domain');
+        try {
+            const response = await fetch('/api/courses');
+            const courses = await response.json();
+
+            courses.forEach(course => {
+                const option = document.createElement('option');
+                option.value = course;
+                option.textContent = course;
+                domainSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error loading courses:', error);
+        }
+    });
         document.getElementById('application-form').addEventListener('submit', async function (e) {
             e.preventDefault(); // Prevent default form submission
+            function getNextDate() {
+                    const today = new Date(); // Get the current date
+                    const nextDate = new Date(today); // Clone today's date
+                    nextDate.setDate(today.getDate() + 1); // Increment the day by 1
 
+                // Format the next date as YYYY-MM-DD
+                const year = nextDate.getFullYear();
+                const month = String(nextDate.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+                const day = String(nextDate.getDate()).padStart(2, '0');
+
+                return `${year}-${month}-${day}`;
+            }
             const formData = new FormData(this);
             const responseDiv = document.getElementById('response');
-
+            const startDate = getNextDate();
+            
+            formData.append("start_date",startDate);
+            formData.append("end_date",null);
+            formData.append("weeks",null);
+            formData.delete('email');
+            formData.append('email',sessionStorage.getItem('email'));
             try {
                 const response = await fetch('/api/internship-applications', {
                     method: 'POST',

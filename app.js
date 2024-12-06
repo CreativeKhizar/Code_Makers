@@ -1,14 +1,16 @@
 const express = require('express');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
-const internshipRoutes = require('./routes/internshipRoutes'); // Keep this route
-const documentRoutes = require('./routes/documentRoutes'); // New route
+const internshipRoutes = require('./routes/internshipRoutes');
+const documentRoutes = require('./routes/documentRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const courseRoutes = require('./routes/courseRoutes'); // New course route
+const pageRoutes=require('./routes/pageRoutes');
 const app = express();
 
 // Middleware
-app.use(express.json()); // Parse JSON bodies
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Serve home.html at the root path
 app.get('/', (req, res) => {
@@ -19,14 +21,15 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use('/auth', authRoutes); // Authentication routes
-app.use('/api', internshipRoutes); // Internship routes
-app.use('/api', documentRoutes); // Document routes
-app.use('/admin', adminRoutes); // Admin panel routes
-
+app.use('/auth', authRoutes);
+app.use('/api', internshipRoutes);
+app.use('/api', documentRoutes);
+app.use('/api', courseRoutes); // Course routes
+app.use('/admin', adminRoutes);
+app.use('/pages',pageRoutes);
 // Serve the certificates and QR codes
-app.use('/approval', express.static(path.join(__dirname, 'public/approval'))); // Serve approval pages
-app.use('/qr_codes', express.static(path.join(__dirname, 'public/qr_codes'))); // Serve QR code images
+app.use('/approval', express.static(path.join(__dirname, 'public/approval')));
+app.use('/qr_codes', express.static(path.join(__dirname, 'public/qr_codes')));
 
 // Server
 const PORT = process.env.PORT || 80;

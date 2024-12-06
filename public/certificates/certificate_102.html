@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate of Internship</title>
+  <link rel="icon" href="/img/logo.jpg" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Watermark style */
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.1;
+      width: 80%;
+    }
+
+    /* Custom Border Styles */
+    .custom-border {
+      position: relative;
+      padding: 20px;
+      border: 5px solid #4a5568;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-border::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 10px solid transparent;
+      border-radius: 15px;
+      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+      z-index: -3;
+    }
+
+    .custom-border::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border: 5px solid #9CA3AF;
+      border-radius: 15px;
+      z-index: -1;
+    }
+
+    /* Accreditation logos for responsiveness */
+    @media (max-width: 640px) {
+      .accreditation-logo {
+        height: 5rem;
+      }
+      .h-24 {
+        height: 6rem;
+      }
+    }
+
+    @media (min-width: 641px) {
+      .accreditation-logo {
+        height: 4rem;
+      }
+      .h-24 {
+        height: 8rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 relative">
+  <div class="max-w-4xl mx-auto my-10 p-8 custom-border relative overflow-hidden">
+
+    <!-- Watermark background image -->
+    <img src="../img/logo_seal.png" alt="Watermark Logo" class="watermark-bg">
+
+    <!-- Header with logos -->
+    <div class="flex flex-col md:flex-row justify-between items-center pb-4 mb-6">
+      <!-- Company logo -->
+      <img src="../img/logo_seal.png" alt="Company Logo" class="h-32 md:h-32">
+
+      <!-- Accreditation logos -->
+      <div class="flex space-x-2 md:space-x-4">
+        <img src="../img/aicte.jpg" alt="AICTE Accreditation Logo" class="accreditation-logo h-24">
+        <img src="../img/msme.png" alt="MSME Accreditation Logo" class="accreditation-logo h-24">
+        <img src="../img/iso.png" alt="ISO Accreditation Logo" class="accreditation-logo h-24">
+      </div>
+    </div>
+
+    <!-- Certificate Header -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold uppercase">Certificate of Internship</h2>
+      <p class="text-xl text-gray-700">Presented by CodeMakers</p>
+    </div>
+
+    <!-- Certificate Body -->
+    <div class="text-center mb-8">
+      <p class="text-lg text-justify">
+        This is to certify that <strong class="text-4xl font-bold text-blue-900">SHAIK ATHIK</strong>, <i class="text-2xl font-semibold text-gray-900">CM2024320102</i> has successfully completed the <strong>Java Internship Program</strong> at <span class="font-semibold">CODEMAKERS</span> from September 27th, 2024 to October 27th, 2024 (4 weeks), with Roll No: 21F61A04I7, from <span class="font-semibold">Siddharth institute of engineering and technology </span>.
+        In recognition of your exceptional performance and dedication, we commend your hard work and contributions to our projects.
+      </p>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="flex flex-col md:flex-row">
+      <!-- Signature -->
+      <div class="text-center md:mr-4">
+        <img src="../img/signature.png" alt="Company Seal" class="h-24 mx-auto">
+        <hr class="my-2 border-gray-300" style="width: 100%; margin: auto;">
+        <p>CEO & FOUNDER</p>
+      </div>
+
+      <!-- Seal -->
+      <div class="text-center md:mx-4">
+        <img src="../img/logo_seal.png" alt="Company Seal" class="h-32 mx-auto">
+      </div>
+
+      <!-- QR Code -->
+      <div class="text-center md:ml-4">
+        <img src="../qr_codes/qr_102.png" alt="QR Code" class="h-32 mx-auto">
+      </div>
+
+      <!-- Gold Seal -->
+      <div class="text-center md:mx-6">
+        <img src="../img/gold.png" alt="Company Seal" class="h-32 mx-auto">
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <h1 class="text-2xl font-bold mb-4">Approved Applications</h1>
+
+    <!-- Search Section -->
+    <div class="mb-4">
+        <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Search by Name or College Name" 
+            class="border rounded p-2"
+        />
+        <button 
+            class="bg-blue-500 text-white p-2 rounded ml-2" 
+            onclick="searchApplications()"
+        >
+            Search
+        </button>
+    </div>
+
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead>
+            <tr class="w-full bg-gray-800 text-white text-left">
+                <th class="py-3 px-4">Internship ID</th>
+                <th class="py-3 px-4">Name</th>
+                <th class="py-3 px-4">Roll Number</th>
+                <th class="py-3 px-4">Phone Number</th>
+                <th class="py-3 px-4">College Name</th>
+                <th class="py-3 px-4">Domain</th>
+                <th class="py-3 px-4">Start Date</th>
+                <th class="py-3 px-4">End Date</th>
+            </tr>
+        </thead>
+        <tbody id="applications-body">
+            <!-- Data will be populated here -->
+        </tbody>
+    </table>
+
+    <script>
+        let applications = []; // Store applications data for search functionality
+
+        // Fetch unapproved applications from the server
+        async function fetchApplications() {
+            try {
+                const response = await fetch('/admin/applications2');
+                applications = await response.json();
+                displayApplications(applications);
+            } catch (error) {
+                console.error('Error fetching applications:', error);
+            }
+        }
+
+        // Display applications in the table
+        function displayApplications(applicationsToDisplay) {
+            const tbody = document.getElementById('applications-body');
+            tbody.innerHTML = ''; // Clear existing rows
+
+            applicationsToDisplay.forEach(application => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="border px-4 py-2">${application.internship_id}</td>
+                    <td class="border px-4 py-2">${application.name}</td>
+                    <td class="border px-4 py-2">${application.rollnumber}</td>
+                    <td class="border px-4 py-2">${application.phonenumber}</td>
+                    <td class="border px-4 py-2">${application.collegename}</td>
+                    <td class="border px-4 py-2">${application.domain}</td>
+                    <td class="border px-4 py-2">${new Date(application.start_date).toLocaleDateString()}</td>
+                    <td class="border px-4 py-2">${new Date(application.end_date).toLocaleDateString()}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Approve application
+        async function approveApplication(internship_id) {
+            try {
+                const response = await fetch(`/admin/approve/${internship_id}`, {
+                    method: 'POST',
+                });
+
+                if (response.ok) {
+                    alert('Application approved successfully!');
+                    fetchApplications(); // Refresh the applications list
+                } else {
+                    alert('There was a problem approving the application.');
+                }
+            } catch (error) {
+                console.error('Error approving application:', error);
+            }
+        }
+
+        // Search applications based on input
+        function searchApplications() {
+            const searchValue = document.getElementById('search-input').value.toLowerCase();
+            const filteredApplications = applications.filter(application => 
+                application.name.toLowerCase().includes(searchValue) || 
+                application.collegename.toLowerCase().includes(searchValue)
+            );
+            displayApplications(filteredApplications); // Display filtered applications
+        }
+
+        // Fetch applications on page load
+        window.onload = fetchApplications;
+    </script>
+</body>
+</html>

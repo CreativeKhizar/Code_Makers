@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Course Management</title>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+        <h2 class="text-xl font-bold mb-6 text-center">Manage Courses</h2>
+
+        <!-- Add Course Form -->
+        <form id="add-course-form" class="mb-6">
+            <label for="course-name" class="block text-gray-700 mb-2">Add New Course</label>
+            <input type="text" id="course-name" name="courseName" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Course Name">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Add Course</button>
+        </form>
+
+        <!-- Delete Course Form -->
+        <form id="delete-course-form">
+            <label for="course-select" class="block text-gray-700 mb-2">Delete Course</label>
+            <select id="course-select" name="courseId" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="">Select Course to Delete</option>
+            </select>
+            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">Delete Course</button>
+        </form>
+
+        <!-- Response Message -->
+        <div id="response-message" class="text-center mt-4 text-gray-700"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadCourses();
+
+            // Add Course Event
+            document.getElementById('add-course-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const courseName = document.getElementById('course-name').value.trim();
+                if (courseName) {
+                    try {
+                        const response = await fetch('/api/courses', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name: courseName })
+                        });
+                        if (response.ok) {
+                            document.getElementById('response-message').textContent = 'Course added successfully!';
+                            document.getElementById('course-name').value = '';
+                            await loadCourses();
+                        } else {
+                            document.getElementById('response-message').textContent = 'Error adding course.';
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        document.getElementById('response-message').textContent = 'Error adding course.';
+                    }
+                }
+            });
+
+            // Delete Course Event
+            document.getElementById('delete-course-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const courseId = document.getElementById('course-select').value;
+                if (courseId) {
+                    try {
+                        const response = await fetch(`/api/courses/${courseId}`, { method: 'DELETE' });
+                        if (response.ok) {
+                            document.getElementById('response-message').textContent = 'Course deleted successfully!';
+                            await loadCourses();
+                        } else {
+                            document.getElementById('response-message').textContent = 'Error deleting course.';
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        document.getElementById('response-message').textContent = 'Error deleting course.';
+                    }
+                }
+            });
+        });
+
+        async function loadCourses() {
+            const selectElement = document.getElementById('course-select');
+            selectElement.innerHTML = '<option value="">Select Course to Delete</option>';
+            try {
+                const response = await fetch('/api/courses');
+                const courses = await response.json();
+                courses.forEach(course => {
+                    console.log(course);
+                    const option = document.createElement('option');
+                    option.value = course;
+                    option.textContent = course;
+                    selectElement.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

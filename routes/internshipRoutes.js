@@ -12,18 +12,25 @@ function formatDate(dateString) {
 
 // POST route to handle internship application submission and PDF generation
 router.post('/internship-applications', async (req, res) => {
-    const { name, rollnumber, collegename, phonenumber, email, domain, start_date, end_date } = req.body;
+    const { name, rollnumber, collegename, phonenumber, email, domain, start_date, end_date, weeks } = req.body;
 
     // SQL query to insert application details
     const query = `
-        INSERT INTO internship_applications (name, rollnumber, collegename, phonenumber, email, domain, start_date, end_date)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO internship_applications (name, rollnumber, collegename, phonenumber, email, domain,start_date)
+        VALUES (?, ?, ?, ?, ?, ?,?)
     `;
 
     try {
         // Execute the query
-        const [result] = await pool.execute(query, [name, rollnumber, collegename, phonenumber, email, domain, start_date, end_date]);
-
+        const [result] = await pool.execute(query, [name, rollnumber, collegename, phonenumber, email, domain,start_date]);
+        const id=result.insertId;
+        // console.log(typeof end_date);
+        // console.log(weeks);
+        if(end_date!='null' && weeks!='null'){
+            console.log("Hello");
+            const query2='Update internship_applications set end_date=? , weeks=? where internship_id=?';
+            await pool.execute(query2,[end_date,weeks,id]);
+        }
         // Create a PDF document for the offer letter
         const doc = new PDFDocument();
 
@@ -58,15 +65,15 @@ router.post('/internship-applications', async (req, res) => {
         doc.moveDown(1); // Add space after the title
         doc.text(`Dear ${name},`, { align: 'left' });
         doc.moveDown(1); // Add space after the greeting
-        doc.text(`On behalf of Codemakers, we are excited to confirm your selection as an Intern under the ${domain} from ${formatDate(start_date)} to ${formatDate(end_date)}. We were impressed with your technical skills and knowledge during the assessment process, and we believe that you will be a valuable addition to our team.`, { align: 'left' });
+        doc.text(`On behalf of Codemakers, we are excited to confirm your selection as an Intern under the ${domain} from ${formatDate(start_date)}. We were impressed with your technical skills and knowledge during the assessment process, and we believe that you will be a valuable addition to our team.`, { align: 'justify' });
         doc.moveDown(1); // Add space after the first paragraph
-        doc.text(`Codemakers takes pride in providing this exceptional opportunity to young tech enthusiasts like you to make them Industry-ready. Your internship will emphasize learning new skills with a deeper understanding of concepts through hands-on application of the Industrial knowledge which you will gain as an Intern.`, { align: 'left' });
+        doc.text(`Codemakers takes pride in providing this exceptional opportunity to young tech enthusiasts like you to make them Industry-ready. Your internship will emphasize learning new skills with a deeper understanding of concepts through hands-on application of the Industrial knowledge which you will gain as an Intern.`, { align: 'justify' });
         doc.moveDown(1); // Add space after the second paragraph
-        doc.text(`Please note that as a temporary employee, you will not be eligible for any of the employee benefits, and you will not receive any stipend during your internship.`, { align: 'left' });
+        doc.text(`Please note that as a temporary employee, you will not be eligible for any of the employee benefits, and you will not receive any stipend during your internship.`, { align: 'justify' });
         doc.moveDown(1); // Add space after the third paragraph
-        doc.text(`This offer letter represents the full extent of the Internship Offer. Please review this letter in full and give acknowledgment.`, { align: 'left' });
+        doc.text(`This offer letter represents the full extent of the Internship Offer. Please review this letter in full and give acknowledgment.`, { align: 'justify' });
         doc.moveDown(2); // Add space before the rewards section
-        doc.fontSize(12).text('Rewards & Benefits', { align: 'left', underline: true });
+        doc.fontSize(12).text('Rewards & Benefits', { align: 'justify', underline: true });
         doc.moveDown(1); // Add space before the list
         doc.text('• Certificate of Internship');
         doc.text('• Webinars with Industry Experts');

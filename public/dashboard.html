@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+
+  <!-- Dashboard Header -->
+  <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-semibold">Admin Dashboard</h1>
+    <div class="flex space-x-4">
+      <button class="bg-blue-800 px-4 py-2 rounded-md hover:bg-blue-700" onclick="addOrRemoveDomain()">
+        Add/Remove Domains
+      </button>
+      <button class="bg-red-500 px-4 py-2 rounded-md hover:bg-red-600" onclick="logout()">
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Content -->
+  <main class="p-6">
+    <!-- User Count Section -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">User Table</h2>
+      <p class="text-gray-700 font-medium">Total Users: <span id="total-users" class="text-blue-600">10</span></p>
+    </div>
+
+    <!-- User Table -->
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="min-w-full text-left text-sm text-gray-700">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="p-4">Internship ID</th>
+            <th class="p-4">Name</th>
+            <th class="p-4">Roll Number</th>
+            <th class="p-4">Phone Number</th>
+            <th class="p-4">College Name</th>
+            <th class="p-4">Domain</th>
+            <th class="p-4">Start Date</th>
+            <th class="p-4">End Date</th>
+            <th class="p-4">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Sample Row -->
+          <tr class="border-b hover:bg-gray-50">
+            <td class="p-4">101</td>
+            <td class="p-4">John Doe</td>
+            <td class="p-4">123456</td>
+            <td class="p-4">+1 123 456 7890</td>
+            <td class="p-4">XYZ University</td>
+            <td class="p-4">Web Development</td>
+            <td class="p-4">2024-05-01</td>
+            <td class="p-4">2024-08-01</td>
+            <td class="p-4">
+              <button class="text-red-500 hover:text-red-700" onclick="deleteUser(this)">
+                Delete
+              </button>
+            </td>
+          </tr>
+          <!-- Additional rows can be added here -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- JavaScript for Buttons -->
+  <script>
+    function addOrRemoveDomain() {
+      alert("Redirect to add/remove domain page");
+    }
+
+    function logout() {
+      alert("Logging out...");
+      // Redirect to the logout page or handle logout logic here
+    }
+
+    function deleteUser(button) {
+      const row = button.closest("tr");
+      row.remove();
+      updateTotalUsers();
+    }
+
+    function updateTotalUsers() {
+      const totalUsers = document.querySelectorAll("tbody tr").length;
+      document.getElementById("total-users").textContent = totalUsers;
+    }
+
+    // Update total users count on page load
+    document.addEventListener("DOMContentLoaded", updateTotalUsers);
+  </script>
+
+</body>
+</html>
